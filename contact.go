@@ -47,6 +47,16 @@ func (c *Connection) Dial(host, path string) {
 	c.conn = conn
 }
 
+// WriteJSON - writes a struct to the websocket connection
+func (c *Connection) WriteJSON(m interface{}) {
+	c.conn.WriteJSON(m)
+}
+
+// WriteBinary - writes a binary string to the websocket connection
+func (c *Connection) WriteBinary(data []byte) {
+	c.conn.WriteMessage(websocket.BinaryMessage, data)
+}
+
 // Close - closes an open websocket connection
 func (c *Connection) Close() {
 	c.conn.WriteMessage(websocket.CloseNormalClosure, []byte(""))
